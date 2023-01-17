@@ -33,7 +33,8 @@
       @click="afficherFormPlat = true"
       icon="edit"
       color="blue"
-      flat>Modifier</q-btn>
+      flat>Modifier
+    </q-btn>
     <q-btn
       @click="dialogSupprimer()"
       icon="delete"

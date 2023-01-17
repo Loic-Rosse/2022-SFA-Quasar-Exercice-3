@@ -1,7 +1,8 @@
+// State : données du magasin
 import { uid } from 'quasar'
 
 const state = {
-  plats: [
+  taches: [
     {
       id: 1,
       image: 'https://i.imgur.com/0umadnY.jpg',
@@ -34,32 +35,40 @@ const state = {
   ]
 }
 
+/*
+Mutations : méthode qui manipulent les données
+Les mutations ne peuvent pas être asynchrones !!!
+ */
 const mutations = {
   supprimerPlat (state, id) {
-    state.plats = state.plats.filter(el => el.id !== id)
+    // Recherche le plat et retourne sa position dans le tableau, son index
+    state.taches = state.taches.filter(el => el.id !== id)
   },
   ajouterPlat (state, plat) {
-    state.plats.push(plat)
+    state.taches.push(plat)
   },
   modifierPlat (state, plat) {
-    // Recherche le plat et retourne sa position dans le tableau, son index
-    const index = state.plats.findIndex(el => el.id === plat.id)
+    const index = state.taches.findIndex(el => el.id === plat.id)
     console.log(index, typeof plat.id)
     // Si une tâche a été trouvée
     if (index !== -1) {
       // Modifie l'objet trouvé avec les nouvelles valeurs
-      Object.assign(state.plats[index], plat)
+      Object.assign(state.taches[index], plat)
     }
   }
 }
 
+/*
+Actions : méthodes du magasin qui font appel aux mutations
+Elles peuvent être asynchrones !
+ */
 const actions = {
   supprimerPlat ({ commit }, id) {
+    // Valide la mutation et y passe les données
     commit('supprimerPlat', id)
   },
   ajouterPlat ({ commit }, plat) {
-    const newId = uid()
-    plat.id = newId
+    plat.id = uid()
     commit('ajouterPlat', plat)
   },
   modifierPlat ({ commit }, plat) {
@@ -67,12 +76,24 @@ const actions = {
   }
 }
 
+/*
+Getters : retourne les données du magasin
+Fonctionne comme les propriétés calculées
+Sert à calculer, trier, filtrer ou formater les donneés
+ */
 const getters = {
-  plats: (state) => {
-    return state.plats
+  // Prend le state comme 1er paramètre
+  taches: (state) => {
+    return state.taches
   }
 }
 
+/*
+Exporte les constantes, variables du fichier
+On pourra ainsi les récupérer, les importer dans un autre fichier JS.
+
+namespace: true, ajoute un namespace à notre objet retourné.
+ */
 export default {
   namespaced: true,
   state,

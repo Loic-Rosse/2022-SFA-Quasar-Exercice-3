@@ -87,7 +87,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('solutionPlats', ['ajouterPlat', 'modifierPlat']),
+    ...mapActions('Plats', ['ajouterPlat', 'modifierPlat']),
     submitForm () {
       this.$refs.nom.validate()
       this.$refs.description.validate()

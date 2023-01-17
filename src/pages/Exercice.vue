@@ -28,63 +28,39 @@ Exercice 3 - Vuex & Formulaires
 8) Si aucune image n'est fournie, utiliser l'image statics/image-placeholder.png
 
 -->
-<q-page class="q-pa-lg">
-  <div class="row q-gutter-lg">
+  <q-page class="q-pa-lg">
+    <div class="row q-gutter-lg">
 
-    <plat
-      v-for="plat in plats"
-      :key="plat.id"
-      :plat="plat" />
+      <plat
+        v-for="plat in taches"
+        :key="plat.id"
+        :plat="plat" />
 
-    <bouton-ajouter
-      @click="afficherFormPlat = true" />
+      <bouton-ajouter
+        @click="afficherFormPlat = true" />
 
-    <q-dialog
-      v-model="afficherFormPlat">
-      <form-plat action="ajouter" />
-    </q-dialog>
+      <q-dialog
+        v-model="afficherFormPlat">
+        <form-plat
+          @close="afficherFormPlat = false"
+          action="ajouter" />
+      </q-dialog>
 
-  </div>
-</q-page>
+    </div>
+  </q-page>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
-      plats: [
-        {
-          id: 1,
-          image: 'https://i.imgur.com/0umadnY.jpg',
-          nom: 'Burger',
-          description: "Un hamburger est un sandwich composé d'une ou plusieurs tranches de viande hachée, généralement du bœuf, placées dans un petit pain ou une brioche.",
-          note: 4
-        },
-        {
-          id: 2,
-          image: 'https://i.imgur.com/b9zDbyb.jpg',
-          nom: 'Pizza',
-          description: "La pizza est un plat savoureux d'origine italienne, consistant en une base généralement ronde et aplatie de pâte levée à base de blé.",
-          note: 5
-        },
-        {
-          id: 3,
-          image: 'https://i.imgur.com/RbKjUjB.jpg',
-          nom: 'Petits choux',
-          description:
-              'Le chou de Bruxelles est une variété de chou, plante herbacée de la famille des Brassicaceae. C’est vraiement pas bon...',
-          note: 1
-        },
-        {
-          id: 4,
-          image: 'https://i.imgur.com/xAuhNVg.jpg',
-          nom: 'BBQ Ribs',
-          description: 'Les BBQ ribs ou barbecue ribs sont des grands classiques très appréciés partout dans le monde.',
-          note: 5
-        }
-      ],
       afficherFormPlat: false
     }
+  },
+  computed: {
+    ...mapGetters('Plats', ['taches'])
   },
   components: {
     plat: require('components/Plat.vue').default,
