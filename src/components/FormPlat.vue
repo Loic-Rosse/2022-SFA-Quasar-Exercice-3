@@ -38,8 +38,9 @@
         v-model="plat.image"
         label="URL de l'image"
         class="col" />
+      <!-- TODO ajouter image par défaut -->
       <q-img
-        :src="plat.image ? plat.image : 'statics/image-placeholder.png'"
+        :src="plat.image ? plat.image : 'https://picsum.photos/200/300'"
         class="q-ml-sm"
         contain />
     </div>
@@ -106,7 +107,9 @@ export default {
   },
   mounted () {
     if (this.action === 'modifier') {
-      this.plat = Object.assign({}, this.platAModifier)
+      // this.plat = Object.assign({}, this.platAModifier)
+      // this.plat = structuredClone(this.platAModifier)
+      this.plat = { ...this.platAModifier }
     }
   }
 }

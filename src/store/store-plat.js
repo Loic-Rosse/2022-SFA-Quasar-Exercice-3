@@ -2,6 +2,7 @@
 import { uid } from 'quasar'
 
 const state = {
+  // TODO renommer en plats
   taches: [
     {
       id: 1,
@@ -40,6 +41,7 @@ Mutations : méthode qui manipulent les données
 Les mutations ne peuvent pas être asynchrones !!!
  */
 const mutations = {
+  // TODO renommer les mutations en majuscule supprimerPlat => SUPPRIMER_PLAT
   supprimerPlat (state, id) {
     // Recherche le plat et retourne sa position dans le tableau, son index
     state.taches = state.taches.filter(el => el.id !== id)
@@ -83,8 +85,14 @@ Sert à calculer, trier, filtrer ou formater les donneés
  */
 const getters = {
   // Prend le state comme 1er paramètre
+  // TODO trier les retour des getters
+  // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+  // https://usefulangle.com/post/227/javascript-sort-array-of-objects
+  // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
   taches: (state) => {
-    return state.taches
+    // return [...state.taches].sort(function (a, b) { return a.note - b.note })
+    // return [...state.taches].sort((a, b) => a.nom > b.nom)
+    return [...state.taches].sort((a, b) => a.nom.localeCompare(b.nom, 'fr'))
   }
 }
 

@@ -1,5 +1,6 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
+// TODO 1re lettre du nom du module de magasin en minuscule
 import Plats from './store-plat'
 // import example from './module-example'
 

@@ -1,8 +1,9 @@
 <template>
   <q-card
     class="card">
+    <!-- TODO ajouter image par défaut -->
     <q-img
-      :src="plat.image ? plat.image : 'statics/image-placeholder.png'"
+      :src="plat.image ? plat.image : 'https://picsum.photos/200/300'"
       basic
       contain
     >
@@ -23,7 +24,7 @@
 
     <q-card-section class="description">
       <span v-if="plat.description">{{ plat.description }}</span>
-      <i v-else>Aucune descripion fournie.</i>
+      <span class="text-italic" v-else>Aucune descripion fournie.</span>
     </q-card-section>
 
     <q-card-actions
@@ -71,12 +72,10 @@ export default {
         message: 'Voulez-vous supprimer ce plat ?',
         persistent: true,
         ok: {
-          label: 'Supprimer',
-          push: true
+          label: 'Supprimer'
         },
         cancel: {
           label: 'Annuler',
-          push: true,
           color: 'grey'
         }
       }).onOk(() => {
